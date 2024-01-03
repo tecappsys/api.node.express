@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { processErrorResponse } from "../utils/helpers";
+import { getToken } from "../services/spotify.service";
 
 export const api_get = async( req: Request , res: Response ) => {
     try {      
@@ -9,3 +10,11 @@ export const api_get = async( req: Request , res: Response ) => {
     }    
 }
 
+export const spotify_token = async( req: Request , res: Response ) => {
+    try {      
+        const token = await getToken();
+        res.json( token );
+    } catch (fail) {
+        processErrorResponse(fail);
+    }    
+}
